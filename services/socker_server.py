@@ -4,6 +4,7 @@ import datetime
 import threading
 from config.settings import BIND_IP, DEFAULT_PORTS, LOG_DIR
 from services.emulation import get_service_banner
+from services.ssh_handler import handle_ssh
 
 ftp_sessions = {}
 blacklist = ["192.168.1.100", "10.0.0.200"]
@@ -43,7 +44,7 @@ class Honeypot:
             if port == 21:
                 self.handle_ftp(client_socket, remote_ip)
             elif port == 22:
-                self.handle_ssh(client_socket, remote_ip)
+                handle_ssh(client_socket, remote_ip, self.log_activity)
             elif port in [80, 443]:
                 self.handle_http(client_socket, remote_ip, port)
             else:
@@ -119,7 +120,7 @@ class Honeypot:
             "<html><body><h1>Welcome to the Honeypot!</h1><p>This is a fake web server.</p></body></html>"
         )
         client_socket.send(response.encode())
-
+        
     def listen_on_port(self, port):
         """Listen for connections on a specific port."""
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
