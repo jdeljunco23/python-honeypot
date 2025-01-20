@@ -17,16 +17,13 @@ class SSHServer(paramiko.ServerInterface):
 
     def check_auth_password(self, username, password):
         """Simulate authentication."""
-        print(f"[DEBUG] Login attempt from {self.remote_ip}: {username}/{password}")
         self.log_activity(22, self.remote_ip, f"Login attempt: {username}/{password}".encode())
         
         # Match fake credentials
         if username == "testuser" and password == "testpassword":
-            print("[DEBUG] Authentication successful")
             self.authenticated = True
             return paramiko.AUTH_SUCCESSFUL
         
-        print("[DEBUG] Authentication failed")
         return paramiko.AUTH_FAILED
 
 
@@ -47,15 +44,10 @@ def handle_ssh(client_socket, remote_ip, log_activity):
 
     server = SSHServer(remote_ip, log_activity)
     try:
-        print("[DEBUG] Starting SSH transport")
         transport.start_server(server=server)
-        print("[DEBUG] Waiting for channel")
         channel = transport.accept(20)  # Wait for client channel
         if channel is None:
-            print(f"[DEBUG] No channel was opened by {remote_ip}")
             return
-        print("[DEBUG] Channel successfully opened")
-
 
         # Send welcome message
         channel.send("Welcome to the fake SSH server!\nType 'exit' to disconnect.\n")
