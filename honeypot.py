@@ -1,4 +1,4 @@
-from services.socker_server import Honeypot
+from services.socket_server import Honeypot
 
 if __name__ == "__main__":
     try:
