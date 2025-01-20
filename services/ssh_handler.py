@@ -1,7 +1,12 @@
 import paramiko
 
-# Generate a fake host key for the SSH server
+# Save key (run this once)
 HOST_KEY = paramiko.RSAKey.generate(2048)
+HOST_KEY.write_private_key_file("server.key")
+
+# Load key
+HOST_KEY = paramiko.RSAKey(filename="server.key")
+
 
 class SSHServer(paramiko.ServerInterface):
     """Custom SSH Server Interface to handle SSH interactions."""
@@ -42,11 +47,15 @@ def handle_ssh(client_socket, remote_ip, log_activity):
 
     server = SSHServer(remote_ip, log_activity)
     try:
+        print("[DEBUG] Starting SSH transport")
         transport.start_server(server=server)
-        channel = transport.accept(20)  # Wait for the client to open a channel
+        print("[DEBUG] Waiting for channel")
+        channel = transport.accept(20)  # Wait for client channel
         if channel is None:
-            print(f"[SSH] No channel opened by {remote_ip}")
+            print(f"[DEBUG] No channel was opened by {remote_ip}")
             return
+        print("[DEBUG] Channel successfully opened")
+
 
         # Send welcome message
         channel.send("Welcome to the fake SSH server!\nType 'exit' to disconnect.\n")
