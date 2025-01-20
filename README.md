@@ -65,12 +65,7 @@ A lightweight, customizable honeypot written in Python to simulate and monitor m
 - **Detection**: Advanced attackers may identify the honeypot. Ensure configurations mimic real-world services.
 
 ## **Planned Enhancements**
-- Real-time alerting via email or Slack.
-- Integration with geolocation APIs for IP tracking.
-- Expanded protocol support (e.g., Telnet, SMTP).
+- Dockerize the honeypot.
+- Build a dashboard for monitoring and visualization.
+- Implement SMTP and DNS protocols.
 
-## **Contributing**
-Contributions are welcome! Submit a pull request or open an issue to suggest new features or report bugs.
-
-## **License**
-This project is licensed under the MIT License. See `LICENSE` for details.
