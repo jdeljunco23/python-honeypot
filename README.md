@@ -49,6 +49,18 @@ A lightweight, customizable honeypot written in Python to simulate and monitor m
    - **Port 22**: SSH
    - **Port 80/443**: HTTP/HTTPS
 
+### Deployment with Docker
+1. Ensure Docker is installed and running on your system.
+2. Build and start the Docker containers:
+   ```bash
+   docker compose -f docker/docker-compose.yml up -d --build
+   ```
+3. The honeypot will run in a Docker container, listening on:
+   - **Port 21**: FTP
+   - **Port 22**: SSH
+   - **Port 80**: HTTP
+   - **Port 443**: HTTPS
+
 ### Configuration
 - Modify `config/settings.py` to adjust:
   - Listening IPs and ports.
