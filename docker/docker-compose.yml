@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  honeypot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "21:21"      # FTP
+      - "22:22"      # SSH
+      - "80:80"      # HTTP
+      - "443:443"    # HTTPS
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1  # Ensures real-time logging in Docker logs
+    restart: always
