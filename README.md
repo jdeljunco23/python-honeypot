@@ -1,6 +1,6 @@
 # **Python Honeypot**
 
-A lightweight, customizable honeypot written in Python to simulate and monitor malicious activity on various network protocols, including HTTP, SSH, and FTP.
+A honeypot written in Python to simulate and monitor malicious activity on various network protocols, including HTTP, SSH, and FTP.
 
 ## **Features**
 - **HTTP Honeypot**: Simulates a basic web server with customizable responses.
@@ -11,7 +11,7 @@ A lightweight, customizable honeypot written in Python to simulate and monitor m
 
 ## **Getting Started**
 ### Prerequisites
-- Python 3.8+
+- Python 3.10+
 - Installed dependencies:
   ```bash
   pip install -r requirements.txt
@@ -77,7 +77,7 @@ A lightweight, customizable honeypot written in Python to simulate and monitor m
 - **Detection**: Advanced attackers may identify the honeypot. Ensure configurations mimic real-world services.
 
 ## **Planned Enhancements**
-- Dockerize the honeypot.
+- Deploy the honeypot.
 - Build a dashboard for monitoring and visualization.
 - Implement SMTP and DNS protocols.
 
